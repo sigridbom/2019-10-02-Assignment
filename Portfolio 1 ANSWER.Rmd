@@ -31,26 +31,30 @@ Who can hold their breath longer on average, those with right or left ocular dom
 ```{r question1}
 
 
-breath_oc <- ggplot(personality_test, aes(ocular_dom, breath_hold, fill = ocular_dom)) + geom_bar(stat = "summary",fun.y = mean) + labs(x = "Ocular dominance", y = "Mean of breath hold (sec)", fill = "Ocular dominance") 
-  
-  
-  #stat_summary(fun.data = ...., geom = "errorbar", width = 0.4)
+breath_oc <- ggplot(personality_test, aes(ocular_dom, breath_hold, fill = ocular_dom)) + geom_bar(stat = "summary",fun.y = mean, width = 0.5) + labs(x = "Ocular dominance", y = "Mean of breath hold (sec)", fill = "Ocular dominance") + stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.4) + coord_cartesian(xlim = NULL, ylim = c(70,0))
 
+breath_oc
+
+breath_oc_mean <- personality_test %>% group_by(ocular_dom) %>%
+  summarise(mean(breath_hold), sd(breath_hold))
+
+breath_oc_mean
 
 #remove "both"?
 #make it more narrow?
-#sæt titel på ledge? (fill = "")
-# + geom_errorbar()
-
-#+ geom_histogram(fun.data = y) 
-
-breath_oc
 
 ```
 
 Explain your results in plain terms here: 
 
-First of all I had to load the needed packages from my library. I used pacman because it automatically updates or downloades a package if you don't already have it in your library. 
+First of all I had to load the needed packages from my library (chunk: r load data and packages). I used pacman because it automatically updates or downloades a package if you don't already have it in your library. 
+
+The graph:
+I put the values of ocular domination on the x-axis and the mean of breath hold on the y-axis. I made the mean of the y-axis by using the fun.y = mean funcion. 
+I used the labs() function to give a title to the x-, and y-axis and the ledge. 
+I created the error bar by using the stat summary function. 
+Lastly I used the coord_cartesian function to make the scale on the y-axis bigger for aesthetic reasons. 
+
 ---
 
 #### Question 2
@@ -58,6 +62,16 @@ First of all I had to load the needed packages from my library. I used pacman be
 Who likes silence vs. noise best? Males or females? Also in this case you should plot the data using ggplot2 (including error bars), then use the mean() and sd() functions to find mean and standard deviation of the two genders.
 
 ```{r question2}
+
+sound_graph <- ggplot(personality_test, aes(gender, sound_level_pref, fill = gender))
+
+sound_graph + geom_bar(stat = "summary", fun.y = mean, width = 0.5) + stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.3) + labs(x = "Gender", y = "Preference of sound level", fill = "Gender") + coord_cartesian(xlim = NULL, ylim = c(35,0))
+
+sound_pref_mean_sd <- personality_test %>% group_by(gender) %>% 
+  summarise(mean(sound_level_pref), sd(sound_level_pref))
+
+sound_pref_mean_sd
+
 
 ```
 
