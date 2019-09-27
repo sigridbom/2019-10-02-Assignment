@@ -131,6 +131,26 @@ Are the Balloon reaction time data (balloon and balloon_balance) normally distri
 
 ```{r question4}
 
+#balloon visual
+ballon_graph <- ggplot(personality_test, aes(x = personality_test$balloon))
+
+ballon_graph + geom_histogram(aes(y = ..density..), binwidth = 0.6) +
+  stat_function(fun = dnorm, args = list(mean(personality_test$balloon, na.rm = TRUE), sd = sd(personality_test$balloon, na.rm = TRUE)), colour = "red", size = 1) + theme_classic() + 
+  labs(x = "Blowing up a ballon", y = "Density")
+
+balloon_qq <- ggplot(personality_test, aes(sample = personality_test$balloon))
+
+balloon_qq + stat_qq() + stat_qq_line(colour = "Red")
+
+#balloon numeric
+
+balloon_num <- round(pastecs::stat.desc(personality_test$balloon, basic = FALSE, norm = TRUE), digits = 2)
+
+breath_num
+
+#balloon balance visual
+balloon_balance_graph <- 
+#balloon balance numeric
 ```
 
 
@@ -146,12 +166,15 @@ Shoe size could tell us something about general body size, which could also be c
 
 shoe_breath <- ggplot(personality_test, aes(personality_test$shoesize, personality_test$breath_hold)) + theme_minimal()
 
+#Graph 1
 shoe_breath + geom_point() + geom_smooth(colour = "red") +
   labs(x = "Shoe size", y = "Breath hold") 
 
+#Graph 2
 shoe_breath + geom_point() + geom_smooth(method = "lm", colour = "red") +
   labs(x = "Shoe size", y = "Breath hold") 
 
+#Graph 3
 shoe_breath_gender <- ggplot(personality_test, aes(personality_test$shoesize, personality_test$breath_hold, fill = personality_test$gender)) + theme_minimal()
 
 shoe_breath_gender + geom_point() + geom_smooth(method = "lm", colour = "red") +
@@ -160,6 +183,11 @@ shoe_breath_gender + geom_point() + geom_smooth(method = "lm", colour = "red") +
 ```
 
 
-Explain your results in plain terms here: 
+I have made three different graphs in order to show the correlation to between shoe size and breath hold (the last graph also shows the difference between males and females).
 
+The first graph shows a scatterplot of the data with a regression line (the red line). It looks like there could be two different groups in the data since there is two slight curves, as in bimodality (probably male and female)
+
+The second graph shows the same, but the regression is now linear. This shows a positive relation between shoe size (which we can refer to body size) and breath hold. 
+
+The third graph (bonus question) shows the correlation between shoe size and breath hold for men and women respectively. Here there is still a clear positive relation between shoe size and breath hold for women, but the regression for men look more constant. 
 
