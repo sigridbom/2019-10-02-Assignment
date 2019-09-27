@@ -12,16 +12,14 @@ knitr::opts_chunk$set(echo = TRUE, include = TRUE)
 
 #### Write a short data mining report on the CogSci Intro Week Personality Test Data in which you answer the following questions in prose, code and graphs:
 
-First of all, you have to import the personality data. If the dataset is in your working directory, then you can just load it into R. Otherwise you will have to change your working directory.
+First of all I odwnload my data and load my packages. 
 
 ```{r load_data and packages}
 personality_test <- read.csv("NEW_CogSciPersonalityTest2019-kopi.csv")
 
-pacman::p_load(tidyverse, ggplot2)
+pacman::p_load(tidyverse, ggplot2, pastecs)
 
 ```
-
-Once you are done loading the data, you can start working on the questions below.
 
 #### Question 1
 
@@ -31,29 +29,33 @@ Who can hold their breath longer on average, those with right or left ocular dom
 ```{r question1}
 
 
-breath_oc <- ggplot(personality_test, aes(ocular_dom, breath_hold, fill = ocular_dom)) + geom_bar(stat = "summary",fun.y = mean, width = 0.5) + labs(x = "Ocular dominance", y = "Mean of breath hold (sec)", fill = "Ocular dominance") + stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.4) + coord_cartesian(xlim = NULL, ylim = c(70,0))
+breath_oc <- ggplot(personality_test, aes(ocular_dom, breath_hold, fill = ocular_dom)) 
 
-breath_oc
+breath_oc + geom_bar(stat = "summary", fun.y = mean, width = 0.5) + labs(x  = "Ocular dominance", y = "Mean of breath hold (sec)", fill = "Ocular dominance") + stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.4) + coord_cartesian(xlim = NULL, ylim = c(70,0)) + theme_minimal()
 
 breath_oc_mean <- personality_test %>% group_by(ocular_dom) %>%
-  summarise(mean(breath_hold), sd(breath_hold))
+  summarise(mean(breath_hold), sd(breath_hold), n())
 
 breath_oc_mean
 
-#remove "both"?
-#make it more narrow?
-
 ```
 
-Explain your results in plain terms here: 
 
-First of all I had to load the needed packages from my library (chunk: r load data and packages). I used pacman because it automatically updates or downloades a package if you don't already have it in your library. 
+In order of answering the question of who can hold their breath longer than average according to ocular dominance (left, right or both), I plot the data into a bar graph with error bars of the standard error of the mean. I also look at the numerical values of the data according to the mean and the standard deviation. 
 
-The graph:
-I put the values of ocular domination on the x-axis and the mean of breath hold on the y-axis. I made the mean of the y-axis by using the fun.y = mean funcion. 
-I used the labs() function to give a title to the x-, and y-axis and the ledge. 
-I created the error bar by using the stat summary function. 
-Lastly I used the coord_cartesian function to make the scale on the y-axis bigger for aesthetic reasons. 
+The group of people with right ocular dominance can hold their breath the longest on average compared to the two other groups. 
+This group also have the smallest errorbar, which means that it is the most likely to be representative as a sample for the whole population. 
+
+###We can see that the errorbar for the participants with both eyes as ocular dominant is quite big. This can be explained by the fact that there were only 4 out of 62 people in this group. The data is therefore not a good representation of a population of people.
+
+Usually you would not calculate both the standard deviation and the standard error of the mean, because they assume different things about the data. 
+
+The standard deviation finds the error of the mean, as in how much the data deviates from the mean. If the SD is relatively large, then the data is not well represented by the mean, and if the SD is relatively small the mean is a good fit of the model. The SD assumes that our data is the whole population. 
+
+The standard error of the mean (the standard error) tells us how well the data as a sample from a population represents the whole population. 
+
+I can see that the standard deviation is quite high for both three groups, so the mean is not a very good fit to the model of the data, because the data is spread....!!!!!
+skriv noget mere konklusionsmæssigt ift sd og SE
 
 ---
 
@@ -68,14 +70,17 @@ sound_graph <- ggplot(personality_test, aes(gender, sound_level_pref, fill = gen
 sound_graph + geom_bar(stat = "summary", fun.y = mean, width = 0.5) + stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.3) + labs(x = "Gender", y = "Preference of sound level", fill = "Gender") + coord_cartesian(xlim = NULL, ylim = c(35,0))
 
 sound_pref_mean_sd <- personality_test %>% group_by(gender) %>% 
-  summarise(mean(sound_level_pref), sd(sound_level_pref))
+  summarise(mean(sound_level_pref), sd(sound_level_pref), n())
 
 sound_pref_mean_sd
 
 
 ```
 
-Explain your results in plain terms here: 
+I made a graph where I put gender on the x-axis and the mean of preference of sound level on the y-axis. I made error bars that show the standard error of the mean. I added titles and changed the scale of the y-axis for aesthetic reasons. I also investegated the numerical values of the data in form of the mean and the standard deviation and the number of people in each group (females and males). 
+
+I can see that the males has a bit higher preference of noice than the females in the data.
+But both the standard deviation and the standard error is bigger for the males than the females. This means that the mean is not a very good fit to the data (SD) and that
 
 ---
 
@@ -85,10 +90,38 @@ Are the breath_hold data normally distributed? Provide visual and numeric suppor
 
 ```{r question3}
 
+#Visual 
+breath_graph <- ggplot(personality_test, aes(x = personality_test$breath_hold))
+
+breath_graph + geom_histogram(aes(y = ..density..), binwidth = 0.6) + stat_function(fun = dnorm, args = list(mean(personality_test$breath_hold, na.rm = TRUE), sd = sd(personality_test$breath_hold, na.rm = TRUE)), colour = "red", size = 1) + theme_classic() + labs(x = "Breath hold", y = "Density")
+
+
+qqbreath <- ggplot(personality_test, aes(sample = breath_hold))
+
+qqbreath + stat_qq() + stat_qq_line(colour = "red")
+
+#Numeric support
+
+breath_num <- round(pastecs::stat.desc(personality_test$breath_hold, basic = FALSE, norm = TRUE), digits = 2)
+
+breath_num
+
+
+
 ```
 
 
 Explain your results in plain terms here: 
+According to the visual inspection of the data I have made a histogram and a Q-Q plot. 
+
+In to see the numeric values for the data I have made a Shapiro-Wilk test of normality (normtest.W). I will also look at the p-value (normtest.p).
+
+p>0,05 not significantly different from a normal distribution --> de afvigelser der er fra en normal fordeling kan vi ikke sige med sikkerhed er tilfældige, og vi har derfor grund til at tro at dataen er normally distributed. 
+p < 0.05 the distribution is significantly different from a normal distribution. --> de afvigelser der er fra normal fordelingen er ikke tilfældige (med sikkerhed), så den er højest sandsynligt ikke normal fordelt. 
+
+  If the test is non-significant (p>.05) it tells us that the distribution of the sample is not significantly different from a normal distribution. If, however, the test is significant (p < .05) then the distribution in question is significantly different from a normal distribution.
+
+#shapiro qq histo p-value 
 
 ---
 
@@ -110,6 +143,19 @@ Explain your results in plain terms here:
 Shoe size could tell us something about general body size, which could also be connected to one's ability to hold your breath. In other words we predict that there is a positive relation between shoe size and how long time CogSci students can hold their breath. Try plotting the two sets of data against each other using a scatter plot (hint: both variables are continuous variables). Bonus question: Males and females have different body sizes. Use grouping in your plot to distinguish the relationship between shoe size and holding breath for males and females.
 
 ```{r question5}
+
+shoe_breath <- ggplot(personality_test, aes(personality_test$shoesize, personality_test$breath_hold)) + theme_minimal()
+
+shoe_breath + geom_point() + geom_smooth(colour = "red") +
+  labs(x = "Shoe size", y = "Breath hold") 
+
+shoe_breath + geom_point() + geom_smooth(method = "lm", colour = "red") +
+  labs(x = "Shoe size", y = "Breath hold") 
+
+shoe_breath_gender <- ggplot(personality_test, aes(personality_test$shoesize, personality_test$breath_hold, fill = personality_test$gender)) + theme_minimal()
+
+shoe_breath_gender + geom_point() + geom_smooth(method = "lm", colour = "red") +
+  labs(x = "Shoe size", y = "Breath hold", fill = "Gender")
 
 ```
 
