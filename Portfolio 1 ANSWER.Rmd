@@ -12,12 +12,12 @@ knitr::opts_chunk$set(echo = TRUE, include = TRUE)
 
 #### Write a short data mining report on the CogSci Intro Week Personality Test Data in which you answer the following questions in prose, code and graphs:
 
-First of all I odwnload my data and load my packages. 
+First of all I download my data and load my packages. 
 
 ```{r load_data and packages}
 personality_test <- read.csv("NEW_CogSciPersonalityTest2019-kopi.csv")
 
-pacman::p_load(tidyverse, ggplot2, pastecs)
+pacman::p_load(tidyverse, pastecs)
 
 ```
 
@@ -43,19 +43,18 @@ breath_oc_mean
 
 In order of answering the question of who can hold their breath longer than average according to ocular dominance (left, right or both), I plot the data into a bar graph with error bars of the standard error of the mean. I also look at the numerical values of the data according to the mean and the standard deviation. 
 
-The group of people with right ocular dominance can hold their breath the longest on average compared to the two other groups. 
+The group of people with right ocular dominance can hold their breath the longest on average compared to the two other groups, since they have a mean of holding their breath for 57,73 seconds where the poeple with left ocular dominance have a mean of 53,42 seconds (and the group with both eyes as ocular dominant has a mean of 50 seconds).
 This group also have the smallest errorbar, which means that it is the most likely to be representative as a sample for the whole population. 
-
-###We can see that the errorbar for the participants with both eyes as ocular dominant is quite big. This can be explained by the fact that there were only 4 out of 62 people in this group. The data is therefore not a good representation of a population of people.
 
 Usually you would not calculate both the standard deviation and the standard error of the mean, because they assume different things about the data. 
 
-The standard deviation finds the error of the mean, as in how much the data deviates from the mean. If the SD is relatively large, then the data is not well represented by the mean, and if the SD is relatively small the mean is a good fit of the model. The SD assumes that our data is the whole population. 
+The standard deviation finds the error of the mean, as in how much the data deviates from the mean. If the SD is relatively large, then the data is not well represented by the mean, and vice versa if the SD is relatively small the mean is a good fit of the data. The SD assumes that our data is the whole population. 
 
 The standard error of the mean (the standard error) tells us how well the data as a sample from a population represents the whole population. 
 
-I can see that the standard deviation is quite high for both three groups, so the mean is not a very good fit to the model of the data, because the data is spread....!!!!!
-skriv noget mere konklusionsmæssigt ift sd og SE
+I can see that the standard deviation is quite high for all three groups, so the mean does not represent the data very well.  
+
+The standard error is the largest for the group with both eyes as ocular dominant. This can be explained by the fact that there were only 4 out of 62 people in this group.
 
 ---
 
@@ -77,10 +76,8 @@ sound_pref_mean_sd
 
 ```
 
-I made a graph where I put gender on the x-axis and the mean of preference of sound level on the y-axis. I made error bars that show the standard error of the mean. I added titles and changed the scale of the y-axis for aesthetic reasons. I also investegated the numerical values of the data in form of the mean and the standard deviation and the number of people in each group (females and males). 
-
-I can see that the males has a bit higher preference of noice than the females in the data.
-But both the standard deviation and the standard error is bigger for the males than the females. This means that the mean is not a very good fit to the data (SD) and that
+I can see that the males have a bit higher preference of noice (mean of 25,58) than the females (mean of 24,29) according to the data.
+But both the standard deviation and the standard error is bigger for the males (SD = 18,53) than the females (SD = 14,56). This means that the mean is not a very good fit to the data and that the data will not represent a whole population very well. 
 
 ---
 
@@ -111,17 +108,16 @@ breath_num
 ```
 
 
-Explain your results in plain terms here: 
-According to the visual inspection of the data I have made a histogram and a Q-Q plot. 
+According to the visual inspection of the data I have made a histogram and a Q-Q plot. The histogram does not look normally distributed, it almost looks bimodal because it has two peaks (which could indicate two modes - female and male). The Q-Q plot depicts the data as the black dots and if the data were normally distributed it would follow the red line more linearly, which it does not do.
 
-In to see the numeric values for the data I have made a Shapiro-Wilk test of normality (normtest.W). I will also look at the p-value (normtest.p).
+In to see the numeric values for the data I have made a Shapiro-Wilk test of normality (normtest.W) and its associated probability (normtest.p). I will also look at the numerical values of skew and kurtosis. I have chosen a significance level of p < 0,05.
 
-p>0,05 not significantly different from a normal distribution --> de afvigelser der er fra en normal fordeling kan vi ikke sige med sikkerhed er tilfældige, og vi har derfor grund til at tro at dataen er normally distributed. 
-p < 0.05 the distribution is significantly different from a normal distribution. --> de afvigelser der er fra normal fordelingen er ikke tilfældige (med sikkerhed), så den er højest sandsynligt ikke normal fordelt. 
+The p-value of the Shapiro-Wilk test is 0,04. Because it is below the significance level of 0,05 it indicates that the data are significantly different from a normal distribution. Therefore we would no expect to see the data normally distributed. 
 
-  If the test is non-significant (p>.05) it tells us that the distribution of the sample is not significantly different from a normal distribution. If, however, the test is significant (p < .05) then the distribution in question is significantly different from a normal distribution.
+The kurtosis is -0,36, which is not very far from 0 (as a normal distribution), but because it is less than 0 the distribution is platykurtic and not normally distributed. 
+The skewness is 0,58, which is also fairly close to 0 (as a normal distribution), but it is still shwoing a deviation from normal.
 
-#shapiro qq histo p-value 
+All of this taking into account I can conclude that the data are not normally distributed.
 
 ---
 
@@ -129,32 +125,65 @@ p < 0.05 the distribution is significantly different from a normal distribution.
 
 Are the Balloon reaction time data (balloon and balloon_balance) normally distributed? Provide visual and numeric support for your answer.
 
-```{r question4}
+```{r question4a}
 
 #balloon visual
 ballon_graph <- ggplot(personality_test, aes(x = personality_test$balloon))
 
 ballon_graph + geom_histogram(aes(y = ..density..), binwidth = 0.6) +
   stat_function(fun = dnorm, args = list(mean(personality_test$balloon, na.rm = TRUE), sd = sd(personality_test$balloon, na.rm = TRUE)), colour = "red", size = 1) + theme_classic() + 
-  labs(x = "Blowing up a ballon", y = "Density")
+  labs(x = "Time blowing up a ballon", y = "Density")
 
 balloon_qq <- ggplot(personality_test, aes(sample = personality_test$balloon))
 
 balloon_qq + stat_qq() + stat_qq_line(colour = "Red")
 
-#balloon numeric
+#balloon numerical
 
 balloon_num <- round(pastecs::stat.desc(personality_test$balloon, basic = FALSE, norm = TRUE), digits = 2)
 
-breath_num
+balloon_num
+
+```
+Note that I have split data into two chunks to make it more readable. 
+
+##### The time taking to blow up a balloon data:
+According to the histogram and the Q-Q plot that data do not look normally distributed. 
+The histogram is positively skewed, which is not normal. By looking at the Q-Q plot it seems that there could be some outliers that potentially disturb the outcome of the data as normally distributed or not. For further research one could remove the potential outliers by checking the z-scores (z>3 are outliers).
+
+The Shapiro-Wilk test provides a normtest.w of 0,66 and normtest.p of 0,00. The p-value is less than 0,05 and the data are therefore significantly different than normally distributed data. The kurtosis is 2,85 is far from 0 and indicates a leptokurtic distribution. The skewness is 2,01 which is also relatively far from 0. 
+
+The visual and the numerical investigations of the assumption of normality show that the data are not normally distributed. 
+
+```{r question 4b}
 
 #balloon balance visual
-balloon_balance_graph <- 
-#balloon balance numeric
+balloon_balance_graph <- ggplot(personality_test, aes(x = personality_test$balloon_balance))
+
+balloon_balance_graph + geom_histogram(aes(y = ..density..), binwidth = 0.6) + 
+  stat_function(fun = dnorm, args = list(mean(personality_test$balloon_balance, na.rm = TRUE), sd = sd(personality_test$balloon_balance, na.rm = TRUE)), colour = "green", size = 1) + theme_classic() + labs (x = "Time balancing a balloon", y = "Density")
+
+balloon_balance_qq <- ggplot(personality_test, aes(sample = personality_test$balloon_balance))
+
+balloon_balance_qq + stat_qq() + stat_qq_line(colour = "green")
+
+#balloon balance numerical
+
+balloon_balance_num <- round(pastecs::stat.desc(personality_test$balloon_balance, basic = FALSE, norm = TRUE), digits = 2)
+
+balloon_balance_num
 ```
 
 
-Explain your results in plain terms here: 
+
+
+##### The time possible for the participants to balance a balloon data:
+
+The histogram and the Q-Q plot depict that data as probably not normally distributed. The histogram is positively skewed and the Q-Q plot show that data are not looking normal, like the linear green line.  
+
+The Shapiro-Wilk test has a p-value of 0,00 which indicates that the data are significantly different from a normal distribution. The skewness is 1,22 which is more than 0 and the kurtosis is -0,30 which is not very far from 0 but since it is negative it indicates a platokurtic distribution and not a normal distribution. 
+
+The visual and the numerical outcome for the data do not indicate a normal distribution.
 
 ---
 
@@ -185,9 +214,11 @@ shoe_breath_gender + geom_point() + geom_smooth(method = "lm", colour = "red") +
 
 I have made three different graphs in order to show the correlation to between shoe size and breath hold (the last graph also shows the difference between males and females).
 
-The first graph shows a scatterplot of the data with a regression line (the red line). It looks like there could be two different groups in the data since there is two slight curves, as in bimodality (probably male and female)
+The first graph shows a scatterplot of the data with a regression line (the red line). It looks like there could be two different groups in the data since there is two slight curves, also called bimodality (probably male and female)
 
-The second graph shows the same, but the regression is now linear. This shows a positive relation between shoe size (which we can refer to body size) and breath hold. 
+In order to make it easier to spot a potentional positive relation between shoe size and ability to hold ones breath, I have made a linear regression in the second graph. 
 
-The third graph (bonus question) shows the correlation between shoe size and breath hold for men and women respectively. Here there is still a clear positive relation between shoe size and breath hold for women, but the regression for men look more constant. 
+Now it is clear that there is a positive relation between shoe size (which we can refer to body size) and the ability to hold ones breath. 
+
+The third graph (bonus question) shows the correlation between shoe size and breath hold for men and women respectively. Here there is still a clear positive relation between shoe size and breath hold for women, but the linear regression for men look more constant with only a slight increase. 
 
