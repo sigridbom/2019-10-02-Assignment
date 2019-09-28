@@ -114,10 +114,13 @@ In to see the numeric values for the data I have made a Shapiro-Wilk test of nor
 
 The p-value of the Shapiro-Wilk test is 0,04. Because it is below the significance level of 0,05 it indicates that the data are significantly different from a normal distribution. Therefore we would no expect to see the data normally distributed. 
 
+The kurtosis and skewness of a standard normal distribution is 0. But you would never find that in the real world, which is why a skewness between -1 and 1 is also acceptable for a normally distributed sample. 
 The kurtosis is -0,36, which is not very far from 0 (as a normal distribution), but because it is less than 0 the distribution is platykurtic and not normally distributed. 
-The skewness is 0,58, which is also fairly close to 0 (as a normal distribution), but it is still shwoing a deviation from normal.
+The skewness is 0,58, which is in the interval for a normal distributed sample. The the skewness suggest a possible normal distribution is not enough when compared to the other parameters of the data. 
 
-All of this taking into account I can conclude that the data are not normally distributed.
+The visual and the numerical outcome for the data do not suggest a normal distribution.
+
+A very good reason for the data not being normally distributed is that the normal distribution allows negative values and extends to very large values witch this data set does not, because time cannot be measured negatively. 
 
 ---
 
@@ -132,7 +135,7 @@ ballon_graph <- ggplot(personality_test, aes(x = personality_test$balloon))
 
 ballon_graph + geom_histogram(aes(y = ..density..), binwidth = 0.6) +
   stat_function(fun = dnorm, args = list(mean(personality_test$balloon, na.rm = TRUE), sd = sd(personality_test$balloon, na.rm = TRUE)), colour = "red", size = 1) + theme_classic() + 
-  labs(x = "Time blowing up a ballon", y = "Density")
+  labs(x = "Time blowing up a ballon", y = "Density") 
 
 balloon_qq <- ggplot(personality_test, aes(sample = personality_test$balloon))
 
@@ -153,7 +156,7 @@ The histogram is positively skewed, which is not normal. By looking at the Q-Q p
 
 The Shapiro-Wilk test provides a normtest.w of 0,66 and normtest.p of 0,00. The p-value is less than 0,05 and the data are therefore significantly different than normally distributed data. The kurtosis is 2,85 is far from 0 and indicates a leptokurtic distribution. The skewness is 2,01 which is also relatively far from 0. 
 
-The visual and the numerical investigations of the assumption of normality show that the data are not normally distributed. 
+The visual and the numerical outcome for the data do not suggest a normal distribution.
 
 ```{r question 4b}
 
@@ -183,7 +186,7 @@ The histogram and the Q-Q plot depict that data as probably not normally distrib
 
 The Shapiro-Wilk test has a p-value of 0,00 which indicates that the data are significantly different from a normal distribution. The skewness is 1,22 which is more than 0 and the kurtosis is -0,30 which is not very far from 0 but since it is negative it indicates a platokurtic distribution and not a normal distribution. 
 
-The visual and the numerical outcome for the data do not indicate a normal distribution.
+The visual and the numerical outcome for the data do not suggest a normal distribution.
 
 ---
 
@@ -212,9 +215,9 @@ shoe_breath_gender + geom_point() + geom_smooth(method = "lm", colour = "red") +
 ```
 
 
-I have made three different graphs in order to show the correlation to between shoe size and breath hold (the last graph also shows the difference between males and females).
+I have made three different graphs in order to show the correlation between shoe size and breath hold (the last graph also shows the difference between males and females).
 
-The first graph shows a scatterplot of the data with a regression line (the red line). It looks like there could be two different groups in the data since there is two slight curves, also called bimodality (probably male and female)
+The first graph shows a scatterplot of the data with a regression line (the red line). It looks like there could be two different groups in the data since there is two local maxima, also called bimodality (probably male and female)
 
 In order to make it easier to spot a potentional positive relation between shoe size and ability to hold ones breath, I have made a linear regression in the second graph. 
 
