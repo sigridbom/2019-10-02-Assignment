@@ -50,10 +50,11 @@ Usually you would not calculate both the standard deviation and the standard err
 
 The standard deviation finds the error of the mean, as in how much the data deviates from the mean. If the SD is relatively large, then the data is not well represented by the mean, and vice versa if the SD is relatively small the mean is a good fit of the data. The SD assumes that our data is the whole population. 
 
-The standard error of the mean (the standard error) tells us how well the data as a sample from a population represents the whole population. 
+The standard error of the mean (the standard error) tells us how well the data as a sample from a population represent the whole population. 
 
-I can see that the standard deviation is quite high for all three groups, so the mean does not represent the data very well.  
+I can see that the standard deviation is quite high for all three groups, so the mean does not represent the data as sample from a population very well.  ## OR DOES IT??
 
++ right and left in SD and SE
 The standard error is the largest for the group with both eyes as ocular dominant. This can be explained by the fact that there were only 4 out of 62 people in this group.
 
 ---
@@ -113,6 +114,8 @@ According to the visual inspection of the data I have made a histogram and a Q-Q
 In to see the numeric values for the data I have made a Shapiro-Wilk test of normality (normtest.W) and its associated probability (normtest.p). I will also look at the numerical values of skew and kurtosis. I have chosen a significance level of p < 0,05.
 
 The p-value of the Shapiro-Wilk test is 0,04. Because it is below the significance level of 0,05 it indicates that the data are significantly different from a normal distribution. Therefore we would no expect to see the data normally distributed. 
+
+NOGET OM 2SEKURTOSIS OG 2SESKEWNESS HVIS TALLENE ER STØRRE END 1 ER DER SIGNIFIKANT FORSKEL PÅ DATASÆTTER OG ET NORMAL DISTRIBUERET DATASÆT CLOSE ENOUGH 
 
 The kurtosis and skewness of a standard normal distribution is 0. But you would never find that in the real world, which is why a skewness between -1 and 1 is also acceptable for a normally distributed sample. 
 The kurtosis is -0,36, which is not very far from 0 (as a normal distribution), but because it is less than 0 the distribution is platykurtic and not normally distributed. 
@@ -224,4 +227,3 @@ In order to make it easier to spot a potentional positive relation between shoe 
 Now it is clear that there is a positive relation between shoe size (which we can refer to body size) and the ability to hold ones breath. 
 
 The third graph (bonus question) shows the correlation between shoe size and breath hold for men and women respectively. Here there is still a clear positive relation between shoe size and breath hold for women, but the linear regression for men look more constant with only a slight increase. 
-
