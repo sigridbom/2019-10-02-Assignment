@@ -44,18 +44,18 @@ breath_oc_mean
 In order of answering the question of who can hold their breath longer than average according to ocular dominance (left, right or both), I plot the data into a bar graph with error bars of the standard error of the mean. I also look at the numerical values of the data according to the mean and the standard deviation. 
 
 The group of people with right ocular dominance can hold their breath the longest on average compared to the two other groups, since they have a mean of holding their breath for 57,73 seconds where the poeple with left ocular dominance have a mean of 53,42 seconds (and the group with both eyes as ocular dominant has a mean of 50 seconds).
-This group also have the smallest errorbar, which means that it is the most likely to be representative as a sample for the whole population. 
+
+The group of people with right ocular dominance also have the smallest errorbar, which means that it is the most likely to be a good representation as a sample from a population.
+The standard error is the largest for the group with both eyes as ocular dominant. This can be explained by the fact that there were only 4 out of 62 people in this group.
+
+I can see that the standard deviation is quite high for all three groups, which means that the mean is not a very good fit of the data. The SD for the right-group is 20,6 seconds, which means that the data points of breath hold for the right-group is spread at 10,3 seconds more than the mean and 10,3 seconds less than the mean. I would conclude that the mean does not fit the data very well. 
 
 Usually you would not calculate both the standard deviation and the standard error of the mean, because they assume different things about the data. 
 
-The standard deviation finds the error of the mean, as in how much the data deviates from the mean. If the SD is relatively large, then the data is not well represented by the mean, and vice versa if the SD is relatively small the mean is a good fit of the data. The SD assumes that our data is the whole population. 
+The standard deviation finds the error of the mean, as in how much the data deviate from the mean. If the SD is relatively large, then the data are not well represented by the mean, and vice versa if the SD is relatively small the mean is a good fit of the data. The SD assumes that our data are the whole population. 
 
 The standard error of the mean (the standard error) tells us how well the data as a sample from a population represent the whole population. 
 
-I can see that the standard deviation is quite high for all three groups, so the mean does not represent the data as sample from a population very well.  ## OR DOES IT??
-
-+ right and left in SD and SE
-The standard error is the largest for the group with both eyes as ocular dominant. This can be explained by the fact that there were only 4 out of 62 people in this group.
 
 ---
 
@@ -77,8 +77,10 @@ sound_pref_mean_sd
 
 ```
 
+I have made a bar plot with error bars depicting the standard error of the mean and calculated the mean and the standard deviation for females and males respectively. 
+
 I can see that the males have a bit higher preference of noice (mean of 25,58) than the females (mean of 24,29) according to the data.
-But both the standard deviation and the standard error is bigger for the males (SD = 18,53) than the females (SD = 14,56). This means that the mean is not a very good fit to the data and that the data will not represent a whole population very well. 
+But both the standard deviation and the standard error is bigger for the males (SD = 18,53) than the females (SD = 14,56). This means that the mean of sound preference for the men is not a very good fit to the data and that the data will not represent a whole population very well. This suggests that the data points for the men have been more spread than the data points for the women. 
 
 ---
 
@@ -109,19 +111,15 @@ breath_num
 ```
 
 
-According to the visual inspection of the data I have made a histogram and a Q-Q plot. The histogram does not look normally distributed, it almost looks bimodal because it has two peaks (which could indicate two modes - female and male). The Q-Q plot depicts the data as the black dots and if the data were normally distributed it would follow the red line more linearly, which it does not do.
+According to the visual inspection of the data I have made a histogram and a Q-Q plot. The histogram does not look normally distributed, it almost looks bimodal because it has two peaks (which could indicate two modes - female and male). The Q-Q plot depicts the data as the black dots and if the data were normally distributed it would follow the red line more linearly, which it does not do. But I would say it is fairly close to the red line. 
 
-In to see the numeric values for the data I have made a Shapiro-Wilk test of normality (normtest.W) and its associated probability (normtest.p). I will also look at the numerical values of skew and kurtosis. I have chosen a significance level of p < 0,05.
+To see the numeric values for the data I have made a Shapiro-Wilk test of normality (normtest.W) and its associated probability (normtest.p). I will also look at the numerical values of skew and kurtosis according to a significance level of p<0,05. That means that if kurt.2SE and skew.2SE are greater than 1, the distribution is significantly different from a normal distribution. Kurt.2SE and skew.2SE are the values of kurtosis and skewness divided by 2 standard errors respectively.
 
 The p-value of the Shapiro-Wilk test is 0,04. Because it is below the significance level of 0,05 it indicates that the data are significantly different from a normal distribution. Therefore we would no expect to see the data normally distributed. 
 
-NOGET OM 2SEKURTOSIS OG 2SESKEWNESS HVIS TALLENE ER STØRRE END 1 ER DER SIGNIFIKANT FORSKEL PÅ DATASÆTTER OG ET NORMAL DISTRIBUERET DATASÆT CLOSE ENOUGH 
+Kurt.2SE is -0,30 and skew.2SE is 0,95. These values are both less than 1, which could indicate that our distribution is normal. But because the value of kurtosis is negative (-0,36) the distribution would be platykurtic and not normally distributed. 
 
-The kurtosis and skewness of a standard normal distribution is 0. But you would never find that in the real world, which is why a skewness between -1 and 1 is also acceptable for a normally distributed sample. 
-The kurtosis is -0,36, which is not very far from 0 (as a normal distribution), but because it is less than 0 the distribution is platykurtic and not normally distributed. 
-The skewness is 0,58, which is in the interval for a normal distributed sample. The the skewness suggest a possible normal distribution is not enough when compared to the other parameters of the data. 
-
-The visual and the numerical outcome for the data do not suggest a normal distribution.
+That these values suggest a possible normal distribution is not enough when compared to the other parameters of the data. Therefore I conclude that the visual and the numerical outcome for the data do not suggest a normal distribution, even though it was fairly close.
 
 A very good reason for the data not being normally distributed is that the normal distribution allows negative values and extends to very large values witch this data set does not, because time cannot be measured negatively. 
 
@@ -157,7 +155,7 @@ Note that I have split data into two chunks to make it more readable.
 According to the histogram and the Q-Q plot that data do not look normally distributed. 
 The histogram is positively skewed, which is not normal. By looking at the Q-Q plot it seems that there could be some outliers that potentially disturb the outcome of the data as normally distributed or not. For further research one could remove the potential outliers by checking the z-scores (z>3 are outliers).
 
-The Shapiro-Wilk test provides a normtest.w of 0,66 and normtest.p of 0,00. The p-value is less than 0,05 and the data are therefore significantly different than normally distributed data. The kurtosis is 2,85 is far from 0 and indicates a leptokurtic distribution. The skewness is 2,01 which is also relatively far from 0. 
+The Shapiro-Wilk test provides a normtest.w of 0,66 and normtest.p of 0,00. The p-value is less than 0,05 and the data are therefore significantly different than normally distributed data. Kurt.2SE is 2,38 and skew.2SE is 3,31 which are both greater than 1, which suggest strong potential for a non-normal distribution. The value of the kurtosis is 2,85 which is greater than 0 and that indicates a leptokurtic distribution. 
 
 The visual and the numerical outcome for the data do not suggest a normal distribution.
 
@@ -185,9 +183,11 @@ balloon_balance_num
 
 ##### The time possible for the participants to balance a balloon data:
 
-The histogram and the Q-Q plot depict that data as probably not normally distributed. The histogram is positively skewed and the Q-Q plot show that data are not looking normal, like the linear green line.  
+The histogram and the Q-Q plot depict that data as probably not normally distributed. The histogram is positively skewed and the Q-Q plot show that the data are not looking normal because they do not follow the linear green line.  
 
-The Shapiro-Wilk test has a p-value of 0,00 which indicates that the data are significantly different from a normal distribution. The skewness is 1,22 which is more than 0 and the kurtosis is -0,30 which is not very far from 0 but since it is negative it indicates a platokurtic distribution and not a normal distribution. 
+The Shapiro-Wilk test has a p-value of 0,00 (p<0,05) which indicates that the data are significantly different from a normal distribution. skew.2SE is 2,02 (>1 = not normal) and kurt.2SE is -0,25 (<1, could be normal, but it is not enough on its own).
+
+The value of kurtosis is negative (-0,30), which suggest a platykurtic distribution.
 
 The visual and the numerical outcome for the data do not suggest a normal distribution.
 
@@ -223,7 +223,8 @@ I have made three different graphs in order to show the correlation between shoe
 The first graph shows a scatterplot of the data with a regression line (the red line). It looks like there could be two different groups in the data since there is two local maxima, also called bimodality (probably male and female)
 
 In order to make it easier to spot a potentional positive relation between shoe size and ability to hold ones breath, I have made a linear regression in the second graph. 
-
 Now it is clear that there is a positive relation between shoe size (which we can refer to body size) and the ability to hold ones breath. 
 
 The third graph (bonus question) shows the correlation between shoe size and breath hold for men and women respectively. Here there is still a clear positive relation between shoe size and breath hold for women, but the linear regression for men look more constant with only a slight increase. 
+
+I can conclude that there in general is a positive relation between shoe size (and there by body size) and the ability to hold ones breath (the larger the shoe size, the longer the breath hold). 
