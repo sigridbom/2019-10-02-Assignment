@@ -48,11 +48,11 @@ The group of people with right ocular dominance can hold their breath the longes
 The group of people with right ocular dominance also have the smallest errorbar, which means that it is the most likely to be a good representation of the whole population seen as a sample from that population.
 The standard error is the largest for the group with both eyes as ocular dominant. This can be explained by the fact that there were only 4 out of 62 people in this group.
 
-I can see that the standard deviation is quite high for all three groups, which means that the mean is not a very good fit of the data. The SD for the right-group is 20,6 seconds, which means that the data points of breath hold for the right-group is spread at 10,3 seconds more than the mean and 10,3 seconds less than the mean. I would conclude that the mean does not fit the data very well. 
+I can see that the standard deviation is quite high for all three groups, which means that the mean as a statistical model does not fit the data very well. The SD for the right-group is 20,6 seconds, which means that the data points of breath hold for the right-group are spread at 10,3 seconds more than the mean and 10,3 seconds less than the mean.
 
 Usually you would not calculate both the standard deviation and the standard error of the mean, because they assume different things about the data. 
 
-The standard deviation finds the error of the mean, as in how much the data deviate from the mean. If the SD is relatively large, then the data are not well represented by the mean, and vice versa if the SD is relatively small the mean is a good fit of the data. The SD assumes that our data are the whole population. 
+The standard deviation finds the error of the mean, as in how much the data deviate from the mean. If the SD is relatively large, then the data are not well represented by the mean, and vice versa if the SD is relatively small the data are well represented by the mean, which means that the mean as a statistical model fits the data well. The SD assumes that our data are the whole population. 
 
 The standard error of the mean (the standard error) tells us how well the data as a sample from a population represent the whole population. 
 
@@ -111,9 +111,9 @@ breath_num
 ```
 
 
-According to the visual inspection of the data I have made a histogram and a Q-Q plot. The histogram does not look normally distributed, it almost looks bimodal because it has two peaks (which could indicate two modes - female and male). The Q-Q plot depicts the data as the black dots and if the data were normally distributed it would follow the red line more linearly, which it does not do. But I would say it is fairly close to the red line. 
+According to the visual inspection of the data I have made a histogram and a Q-Q plot. The histogram does not look normally distributed, it almost looks bimodal because it has two peaks (which could indicate two modes - female and male). The Q-Q plot depicts the data as the black dots and if the data were normally distributed it would follow the red line more linearly, which they do not do. But I would say it is fairly close to the red line. 
 
-To see the numeric values for the data I have made a Shapiro-Wilk test of normality (normtest.W) and its associated probability (normtest.p). I will also look at the numerical values of skew and kurtosis according to a significance level of p<0,05. That means that if kurt.2SE and skew.2SE are greater than 1, the distribution is significantly different from a normal distribution. Kurt.2SE and skew.2SE are the values of kurtosis and skewness divided by 2 standard errors respectively.
+To see the numeric values for the data I have made a Shapiro-Wilk test of normality (normtest.W) and found its associated probability (normtest.p). I will also look at the numerical values of skew and kurtosis according to a significance level of p<0,05. That means that if kurt.2SE and skew.2SE are greater than 1, the distribution is significantly different from a normal distribution. Kurt.2SE and skew.2SE are the values of kurtosis and skewness divided by 2 standard errors respectively.
 
 The p-value of the Shapiro-Wilk test is 0,04. Because it is below the significance level of 0,05 it indicates that the data are significantly different from a normal distribution. Therefore we would no expect to see the data normally distributed. 
 
@@ -153,7 +153,7 @@ Note that I have split data into two chunks to make it more readable.
 
 ##### The time taking to blow up a balloon data:
 According to the histogram and the Q-Q plot the data do not look normally distributed. 
-The histogram is positively skewed, which is not normal. By looking at the Q-Q plot it seems that there could be some outliers that potentially disturb the outcome of the data as normally distributed or not. For further research one could remove the potential outliers by checking the z-scores (z>3 are outliers).
+The histogram is positively skewed, which is not normal. By looking at the Q-Q plot it seems that there could be some outliers that potentially disturb the outcome of the data as normally distributed or not. For further research one could remove the potential outliers by checking the z-scores (if the z > 3 the data points are outliers).
 
 The Shapiro-Wilk test provides a normtest.w of 0,66 and normtest.p of 0,00. The p-value is less than 0,05 and the data are therefore significantly different than normally distributed data. Kurt.2SE is 2,38 and skew.2SE is 3,31 which are both greater than 1, which suggest strong potential for a non-normal distribution. The value of the kurtosis is 2,85 which is greater than 0 and that indicates a leptokurtic distribution. 
 
@@ -220,7 +220,7 @@ shoe_breath_gender + geom_point() + geom_smooth(method = "lm", colour = "red") +
 
 I have made three different graphs in order to show the correlation between shoe size and breath hold (the last graph also shows the difference between males and females).
 
-The first graph shows a scatterplot of the data with a regression line (the red line). It looks like there could be two different groups in the data since there is two local maxima, also called bimodality (probably male and female)
+The first graph shows a scatterplot of the data with a regression line (the red line). It looks like there could be two different groups in the data since there are two local maxima, also called bimodality (probably male and female)
 
 In order to make it easier to spot a potentional positive relation between shoe size and ability to hold ones breath, I have made a linear regression in the second graph. 
 Now it is clear that there is a positive relation between shoe size (which we can refer to body size) and the ability to hold ones breath. 
