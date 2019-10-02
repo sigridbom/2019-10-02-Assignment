@@ -80,7 +80,7 @@ sound_pref_mean_sd
 I have made a bar plot with error bars depicting the standard error of the mean and calculated the mean and the standard deviation for females and males respectively. 
 
 I can see that the males have a bit higher preference of noice (mean of 25,58) than the females (mean of 24,29) according to the data.
-But both the standard deviation and the standard error is bigger for the males (SD = 18,53) than the females (SD = 14,56). This means that the mean of sound preference for the men is not a very good fit to the data and that the data will not represent a whole population very well. This suggests that the data points for the men have been more spread than the data points for the women. 
+But both the standard deviation and the standard error is bigger for the males (SD = 18,53) than the females (SD = 14,56). This means that the mean of sound preference for the men in the data set is not a very good fit to the data and that the standard error is large means that the data will not represent a whole population very well. This suggests that the data points for the men have been more spread than the data points for the women. 
 
 ---
 
@@ -118,7 +118,6 @@ To see the numeric values for the data I have made a Shapiro-Wilk test of normal
 The p-value of the Shapiro-Wilk test is 0,04. Because it is below the significance level of 0,05 it indicates that the data are significantly different from a normal distribution. Therefore we would no expect to see the data normally distributed. 
 
 Kurt.2SE is -0,30 and skew.2SE is 0,95. These values are both less than 1, which could indicate that our distribution is normal. But because the value of kurtosis is negative (-0,36) the distribution would be platykurtic and not normally distributed. 
-
 That these values suggest a possible normal distribution is not enough when compared to the other parameters of the data. Therefore I conclude that the visual and the numerical outcome for the data do not suggest a normal distribution, even though it was fairly close.
 
 A very good reason for the data not being normally distributed is that the normal distribution allows negative values and extends to very large values which this data set does not, because time cannot be measured negatively. 
@@ -153,7 +152,7 @@ Note that I have split data into two chunks to make it more readable.
 
 ##### The time taking to blow up a balloon data:
 According to the histogram and the Q-Q plot the data do not look normally distributed. 
-The histogram is positively skewed, which is not normal. By looking at the Q-Q plot it seems that there could be some outliers that potentially disturb the outcome of the data as normally distributed or not. For further research one could remove the potential outliers by checking the z-scores (if the z > 3 the data points are outliers).
+The histogram is positively skewed, which is not normal. By looking at the Q-Q plot it seems that there could be some outliers that potentially disturb the outcome of the data as normally distributed or not. For further research one could remove the potential outliers by checking the z-scores (if the z > 3 the data points are outliers and could be removed).
 
 The Shapiro-Wilk test provides a normtest.w of 0,66 and normtest.p of 0,00. The p-value is less than 0,05 and the data are therefore significantly different than normally distributed data. Kurt.2SE is 2,38 and skew.2SE is 3,31 which are both greater than 1, which suggest strong potential for a non-normal distribution. The value of the kurtosis is 2,85 which is greater than 0 and that indicates a leptokurtic distribution. 
 
@@ -185,7 +184,7 @@ balloon_balance_num
 
 The histogram and the Q-Q plot depict the data as not normally distributed. The histogram is positively skewed and the Q-Q plot show that the data are not looking normal because they do not follow the linear green line.  
 
-The Shapiro-Wilk test has a p-value of 0,00 (p<0,05) which indicates that the data are significantly different from a normal distribution. skew.2SE is 2,02 (>1 = not normal) and kurt.2SE is -0,25 (<1, could be normal, but it is not enough on its own).
+The Shapiro-Wilk test has a p-value of 0,00 (p<0,05) which indicates that the data are significantly different from a normal distribution. skew.2SE is 2,02 (>1 = not normal) and kurt.2SE is -0,25 (<1, could indicate normality, but it is not enough on its own).
 
 The value of kurtosis is negative (-0,30), which suggest a platykurtic distribution.
 
