@@ -184,9 +184,7 @@ balloon_balance_num
 
 The histogram and the Q-Q plot depict the data as not normally distributed. The histogram is positively skewed and the Q-Q plot show that the data are not looking normal because they do not follow the linear green line.  
 
-The Shapiro-Wilk test has a p-value of 0,00 (p<0,05) which indicates that the data are significantly different from a normal distribution. skew.2SE is 2,02 (>1 = not normal) and kurt.2SE is -0,25 (<1, could indicate normality, but it is not enough on its own).
-
-The value of kurtosis is negative (-0,30), which suggest a platykurtic distribution.
+The Shapiro-Wilk test has a p-value of 0,00 (p<0,05) which indicates that the data are significantly different from a normal distribution. skew.2SE is 2,02 (>1 = not normal) and kurt.2SE is -0,25 (<1, could indicate normality, but it is not enough on its own). Plus the value of kurtosis is negative (-0,30), which suggest a platykurtic distribution.
 
 The visual and the numerical outcome for the data do not suggest a normal distribution.
 
